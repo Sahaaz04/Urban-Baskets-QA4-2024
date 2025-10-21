@@ -6,9 +6,9 @@ df["transaction_date"] = pd.to_datetime(df["transaction_date"])
 
 # Define quarters
 
-q4_2024 = df[(df["transaction_date"] >= "2024-10-01") & (df["transaction_date"] <= "2024-12-31")] # Q4 2024 (Oct–Dec)
-q3_2024 = df[(df["transaction_date"] >= "2024-07-01") & (df["transaction_date"] <= "2024-09-30")] # Q3 2024 (Jul–Sep)
-q4_2023 = df[(df["transaction_date"] >= "2023-10-01") & (df["transaction_date"] <= "2023-12-31")] # Q4 2023 (Oct–Dec)
+q4_2024 = df[df["transaction_date"].between("2024-10-01", "2024-12-31")]  # Q4 2024
+q3_2024 = df[df["transaction_date"].between("2024-07-01", "2024-09-30")]  # Q3 2024
+q4_2023 = df[df["transaction_date"].between("2023-10-01", "2023-12-31")]  # Q4 2023
 
 # Volume & Value Metrics
 total_sales = q4_2024["total_spent"].sum()
@@ -52,6 +52,7 @@ weekday_sales = q4_2024.groupby("day_of_week")["total_spent"].mean().sort_index(
 # Items per Transaction 
 items_per_txn = q4_2024.groupby("transaction_id")["quantity"].sum()
 avg_items_per_txn = items_per_txn.mean()
+
 
 
 
