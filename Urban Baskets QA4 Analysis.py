@@ -4,7 +4,7 @@ import pandas as pd
 df = pd.read_csv(r"C:\Program Files\Analysis\Urban Basket Sales 2024 (Clean).csv")
 df["transaction_date"] = pd.to_datetime(df["transaction_date"])
 
-# --- Define quarters ---
+# ---Define quarters---
 
 q4_2024 = df[(df["transaction_date"] >= "2024-10-01") & (df["transaction_date"] <= "2024-12-31")] # Q4 2024 (Oct–Dec)
 
@@ -60,6 +60,7 @@ weekday_sales = q4_2024.groupby("day_of_week")["total_spent"].mean().sort_index(
 # Items per Transaction 
 items_per_txn = q4_2024.groupby("transaction_id")["quantity"].sum()
 avg_items_per_txn = items_per_txn.mean()
+
 
 
 
